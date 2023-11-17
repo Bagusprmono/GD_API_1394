@@ -12,20 +12,19 @@ class BarangController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $barang = Barang::all();
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil ambil data',
-                "data"=> $barang
+                "data" => $barang
             ], 200);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
-                "data"=> []
-            ],400);
+                "data" => []
+            ], 400);
         }
     }
 
@@ -34,21 +33,19 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $barang = Barang::find($request->all());
-
+        try {
+            $barang = Barang::create($request->all());
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil insert data',
-                "data"=> $barang
+                "data" => $barang
             ], 200);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
-                "data"=> []
-            ],400);
+                "data" => []
+            ], 400);
         }
     }
 
@@ -57,23 +54,22 @@ class BarangController extends Controller
      */
     public function show($id)
     {
-        try{
+        try {
             $barang = Barang::find($id);
 
-            if(!$barang) throw new \Exception("Barang tidak ditemukan");
+            if (!$barang) throw new \Exception("Barang tidak ditemukan");
 
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil ambil data',
-                "data"=> $barang
+                "data" => $barang
             ], 200);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
-                "data"=> []
-            ],400);
+                "data" => []
+            ], 400);
         }
     }
 
@@ -82,25 +78,24 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $barang = Barang::find($id);
 
-            if(!$barang) throw new \Exception("Barang tidak ditemukan");
+            if (!$barang) throw new \Exception("Barang tidak ditemukan");
 
             $barang->update($request->all());
 
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil update data',
-                "data"=> $barang
+                "data" => $barang
             ], 200);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
-                "data"=> []
-            ],400);
+                "data" => []
+            ], 400);
         }
     }
 
@@ -109,23 +104,24 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
             $barang = Barang::find($id);
 
-            if(!$barang) throw new \Exception("Barang tidak ditemukan");
+            if (!$barang) throw new \Exception("Barang tidak ditemukan");
+
+            $barang->delete();
 
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil delete data',
-                "data"=> $barang
+                "data" => $barang
             ], 200);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
                 "message" => $e->getMessage(),
-                "data"=> []
-            ],400);
+                "data" => []
+            ], 400);
         }
     }
 }
